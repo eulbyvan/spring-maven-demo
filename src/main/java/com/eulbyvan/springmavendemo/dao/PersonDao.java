@@ -13,6 +13,7 @@ public interface PersonDao {
         return insertPerson(id, person);
     }
 
+//    List<Person> selectAllPeople(int page, int pageSize);
     List<Person> selectAllPeople();
 
     Optional<Person> selectPersonById(UUID id);

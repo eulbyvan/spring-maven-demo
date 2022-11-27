@@ -3,8 +3,10 @@ package com.eulbyvan.springmavendemo.api;
 import com.eulbyvan.springmavendemo.model.Person;
 import com.eulbyvan.springmavendemo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,9 +21,14 @@ public class PersonController {
     }
 
     @PostMapping
-    public void addPerson(@RequestBody Person person) {
+    public void addPerson(@Valid @NonNull @RequestBody Person person) {
         personService.addPerson(person);
     }
+
+//    @GetMapping
+//    public List<Person> getAllPeople(@NonNull @RequestBody int page, @NonNull @RequestBody int pageSize) {
+//        return personService.getAllPeople(page, pageSize);
+//    }
 
     @GetMapping
     public List<Person> getAllPeople() {
@@ -39,7 +46,7 @@ public class PersonController {
     }
 
     @PutMapping(path = "{id}")
-    public void updatePersonById(@PathVariable("id") UUID id, @RequestBody Person personToUpdate) {
+    public void updatePersonById(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Person personToUpdate) {
         personService.editPersonById(id, personToUpdate);
     }
 }
